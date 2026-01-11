@@ -1,0 +1,1238 @@
+<!DOCTYPE html>()
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metamorfosis - Baraja de Mariposas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            color: #6e3977;
+            background-color: #f5f5f5;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            animation: zoomIn 20s ease-out infinite alternate;
+        }
+
+        @font-face {
+    font-family: "PlayfairDisplay";
+    src: url("fonts/playfairdisplay.ttf") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Outfit";
+    src: url("fonts/outfit.ttf") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bethany";
+    src: url("fonts/Bethany\ Elingston.otf") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+        @keyframes zoomIn {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 10vw;
+            font-weight: 1500;
+            font-family: 'Bethany';
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 2em;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 3em;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* FLOATING BUTTERFLIES */
+        .floating-butterfly {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.3;
+            animation: float 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-butterfly:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-butterfly:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .floating-butterfly:nth-child(3) { right: 20%; animation-delay: 4s; }
+        .floating-butterfly:nth-child(4) { right: 40%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-60px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        /* CATEGORY SECTION (palos) */
+        .category-section {
+            padding: 80px 20px 60px;
+            color: #f5f5f5;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 2.8em;
+            color: #6e3977;
+            margin-bottom: 50px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .category-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: 220px;
+            gap: 30px 40px;
+        }
+
+        @media (max-width: 600px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 200px;
+                max-width: 500px;
+            }
+        }
+
+        .category-card {
+            border-radius: 22px;
+            padding: 30px 25px;
+            background: radial-gradient(circle at top, #b4c7e8, #9674b2);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-cardD {
+            border-radius: 22px;
+            padding: 30px 25px;
+            background: radial-gradient(circle at top, #b4c7e8, #9674b2);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-cardT {
+            border-radius: 22px;
+            padding: 30px 25px;
+            background: radial-gradient(circle at top, #b4c7e8, #9674b2);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-cardP {
+            border-radius: 22px;
+            padding: 30px 25px;
+            background: radial-gradient(circle at top, #b4c7e8, #9674b2);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .category-cardD:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .category-cardT:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .category-cardP:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .category-icon {
+            font-size: 3.2em;
+            margin-bottom: 12px;
+        }
+
+        .category-name {
+            font-size: 1.8em;
+            color: #f5f5f5;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .category-desc {
+            font-size: 1em;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* GALLERY SECTION (lista de mariposas por palo) */
+        .gallery-section {
+            display: none;
+            min-height: 100vh;
+            padding: 80px 20px 100px;
+            color: #f5f5f5;
+            position: relative;
+        }
+
+        .gallery-section.active {
+            display: block;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: #6e3977;
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: #6e3977;
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .back-to-categories {
+            display: inline-block;
+            margin: 0 auto 40px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .back-to-categories:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .butterfly-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.butterfly-card:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    mix-blend-mode: multiply;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #f5f5f5;
+    object-fit: contain;
+    transition: transform 0.4s;
+    mix-blend-mode: multiply;
+}
+
+/* Ocultar el texto de las tarjetas */
+.card-info {
+    display: none;
+    background-color: #f5f5f5;
+}
+
+        /* DETAIL PAGE */
+        .detail-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #f5f5f5;
+            z-index: 1000;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .detail-page.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #f5f5f5;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 2em;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-btn:hover {
+            background: white;
+            color: #0a0a0a;
+            transform: rotate(90deg);
+        }
+
+        /* NUEVO LAYOUT DE DETALLE: PNG grande centrado */
+        .detail-hero {
+            padding-top: 80px;          /* espacio para el botón de cerrar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: #f5f5f5;
+        }
+
+        .detail-image-wrapper {
+            width: 100%;
+            max-width: 600px;           /* tamaño máximo de la mariposa */
+            margin: 0 auto 20px;
+            padding: 0 20px;
+        }
+
+        .detail-hero-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;     /* se ve toda la imagen sin recorte [web:25] */
+        }
+
+        .detail-hero-text {
+            text-align: center;
+            padding: 0 20px 20px;
+        }
+
+        .detail-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .detail-latin {
+            font-size: 1.4rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .detail-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 40px 80px;
+        }
+
+        .detail-section {
+            margin-bottom: 60px;
+        }
+
+        .detail-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .meaning-box {
+            background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(118,75,162,0.2));
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            margin-top: 40px;
+        }
+
+        .meaning-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #9674b2;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 12vw; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .detail-title { font-size: 2.4rem; }
+            .detail-content { padding: 30px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="floating-butterfly"></div>
+        <div class="floating-butterfly"></div>
+        <div class="floating-butterfly"></div>
+        <div class="floating-butterfly"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Wing Deck</h1>
+            <p class="hero-subtitle">Una baraja de transformación y belleza</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- CATEGORY SECTION (palos) -->
+    <section class="category-section" id="categorySection">
+        <h2 class="category-title">Asignación de mariposas por palo</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="openSuit('corazones')">
+                <div class="category-icon">♥️</div>
+                <div class="category-name">Corazones</div>
+                <div class="category-desc">Mariposas rojas y naranjas. Pasión, latido, deseo ardiente.</div>
+            </div>
+            <div class="category-card" onclick="openSuit('diamantes')">
+                <div class="category-icon">♦️</div>
+                <div class="category-name">Diamantes</div>
+                <div class="category-desc">Mariposas amarillas y doradas. Luz, brillo, revelación.</div>
+            </div>
+            <div class="category-card" onclick="openSuit('treboles')">
+                <div class="category-icon">♣️</div>
+                <div class="category-name">Tréboles</div>
+                <div class="category-desc">Mariposas verdes y negras. Naturaleza, raíz, sombra fértil.</div>
+            </div>
+            <div class="category-card" onclick="openSuit('picas')">
+                <div class="category-icon">♠️</div>
+                <div class="category-name">Picas</div>
+                <div class="category-desc">Mariposas azules y moradas. Misterio, noche, intuición.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION (lista de mariposas dentro de un palo) -->
+    <section class="gallery-section" id="gallerySection">
+        <h2 class="gallery-title" id="galleryTitle">Descubre las Mariposas</h2>
+        <p class="gallery-subtitle" id="gallerySubtitle"></p>
+
+        <div style="text-align:center;">
+            <button class="back-to-categories" onclick="backToCategories()">← Volver a los palos</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- tarjetas de mariposas generadas por JS -->
+        </div>
+    </section>
+
+    <!-- DETAIL PAGE -->
+    <div class="detail-page" id="detailPage">
+        <div class="close-btn" onclick="closeDetail()">×</div>
+        <div id="detailContent"></div>
+    </div>
+
+    <script>
+        // Datos de mariposas + palo asignado
+        const butterflies = [
+            {
+                id: 0,
+                suit: "corazones",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/C-AS Monarca.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 1,
+                suit: "corazones",
+                name: "Roja Sangre",
+                latin: "Cymothoe sangaris",
+                image: "mariposas reales/C-2 Roja Sangre.jpg",
+                description: "Mariposa africana de un rojo intenso y vibrante. Habita las selvas tropicales de África Central. Sus colores brillantes sirven como advertencia a depredadores.",
+                habitat: "Selvas tropicales húmedas de África Central, especialmente en el Congo y Camerún. Vive en el dosel superior del bosque, entre 15-30 metros de altura.",
+                extended: "Los machos son de un rojo más intenso que las hembras, y utilizan este color para establecer territorios y atraer parejas. Se alimentan principalmente de frutas fermentadas y savia de árboles. Su vuelo es rápido y errático, lo que las hace esquivas incluso para observadores experimentados.",
+                meaning: "Pasión, vitalidad y fuerza vital"
+            },
+            {
+                id: 2,
+                suit: "corazones",
+                name: "Alas de fuego",
+                latin: "Dryas iulia",
+                image: "mariposas reales/C-3 Alas de fuego.jpg",
+                description: "También llamada Julia o Flama. Su naranja ardiente recuerda al fuego del atardecer tropical. Común en América Central y del Sur, con vuelo rápido y errático entre flores. Sus largas alas estrechas le permiten maniobras ágiles entre la vegetación densa.",
+                extended: "Es una de las mariposas más longevas, pudiendo vivir varios meses. Las hembras son ligeramente más pálidas que los machos. Prefieren néctar de flores rojas y naranjas, especialmente lantanas y hamelia. Son territoriales y los machos persiguen agresivamente a otros machos que invaden su espacio.",
+                habitat: "Bordes de selva, jardines tropicales y áreas abiertas con flores desde el sur de Estados Unidos hasta Brasil. Prefiere zonas soleadas cerca de bosques.",
+                meaning: "Energía, creatividad y cambio constante"
+            },
+            {
+                id: 3,
+                suit: "corazones",
+                name: "Tigre",
+                latin: "Danaus chrysippus",
+                image: "mariposas reales/C-4 Tigre.webp",
+                description: "Mariposa africana y asiática con patrón rayado naranja y negro similar al tigre que evoca fuerza y poder. Conocida por su resistencia a toxinas y capacidad migratoria. Es prima de la Monarca y comparte su estrategia de advertencia química mediante colores brillantes.",
+                extended: "Tiene una distribución enorme, desde África subsahariana hasta Australia. Es increíblemente resistente y puede sobrevivir en ambientes áridos donde otras mariposas no prosperan. Los machos tienen pequeñas bolsas de olor en las alas que usan para atraer hembras. Es común verlas en grandes grupos bebiendo de charcos de barro.",
+                habitat: "Sabanas africanas, zonas áridas, jardines urbanos y campos abiertos. Se adapta a ambientes diversos desde el nivel del mar hasta 2,000 metros. Común en África, Medio Oriente y Asia tropical.",
+                meaning: "Fortaleza, valentía y determinación"
+            },
+            {
+                id: 4,
+                suit: "corazones",
+                name: "Coral",
+                latin: "Actinote pellenea",
+                image: "mariposas reales/C-5 Brown Peacock.jpg",
+                description: "Sus tonos coral y melocotón la hacen parecer una flor voladora. Originaria de Sudamérica, es endémica de regiones montañosas donde el clima es más fresco. Su color suave contrasta con el verde intenso de los bosques nublados donde habita.",
+                extended: "Es de tamaño mediano y tiene un vuelo suave y ondulante. Prefiere flores pequeñas y delicadas de las que extrae néctar con su probóscide corta. Las hembras ponen huevos en plantas específicas de la familia Asteraceae. Son más activas durante las mañanas frescas cuando el sol aún no calienta completamente.",
+                habitat: "Bosques nublados y zonas montañosas de los Andes, entre 1,500 y 3,000 metros de altitud. Prefiere áreas con niebla matinal y temperaturas frescas en Colombia, Ecuador y Perú.",
+                meaning: "Belleza, delicadeza y armonía"
+            },
+            {
+                id: 5,
+                suit: "corazones",
+                name: "Roja Puntos Blancos",
+                latin: "Acraea quirina",
+                image: "mariposas reales/C-6 Roja puntos blancos.jpg",
+                description: "El contraste perfecto entre rojo vibrante y puntos blancos puros crea un patrón hipnótico que captura la mirada. Habita en las sabanas africanas, donde sus manchas blancas brillan como perlas bajo el sol intenso. Es una mariposa de tamaño mediano con vuelo lento y deliberado.",
+                extended: "Pertenece a la familia Nymphalidae y es tóxica para los depredadores debido a las plantas que consume en su fase larvaria. Los puntos blancos no son solo decorativos, sino que refuerzan la señal de advertencia. Vuela bajo, cerca del suelo, visitando flores pequeñas. Es común verla en grupos durante la estación de lluvias.",
+                habitat: "Sabanas abiertas, praderas y zonas de matorral en África Oriental y Occidental. Prefiere áreas con vegetación baja y flores silvestres abundantes, especialmente después de las lluvias.",
+                meaning: "Equilibrio, contraste y dualidad"
+            },
+            {
+                id: 6,
+                suit: "corazones",
+                name: "Naranja Tropical",
+                latin: "Dryadula phaetusa",
+                image: "mariposas reales/C-7 Naranja tropical.jpg",
+                description: "El naranja más vibrante y puro de las selvas americanas. Su color es tan intenso que parece brillar con luz propia. Su vuelo rápido y colores brillantes la hacen destacar incluso en el dosel denso del bosque tropical, donde compite visualmente con flores y frutos coloridos.",
+                extended: "Tiene alas largas y estrechas que le dan velocidad y maniobrabilidad. Prefiere volar en áreas soleadas y es común verla deslizándose por caminos forestales. Los machos son territoriales y patrullan áreas específicas buscando hembras. Se alimenta de néctar de flores tubulares y ocasionalmente de minerales en suelos húmedos.",
+                habitat: "Selvas tropicales y bosques húmedos desde México hasta la Amazonia. Prefiere el borde de los bosques, claros y caminos forestales donde hay abundante luz solar. Desde el nivel del mar hasta 1,200 metros.",
+                meaning: "Alegría, optimismo y calidez"
+            },
+            {
+                id: 7,
+                suit: "corazones",
+                name: "Roja Manchada",
+                latin: "Hypolimnas misippus",
+                image: "mariposas reales/C-8 Roja Manchada.jpeg",
+                description: "Maestra del disfraz y el mimetismo batesiano, imita perfectamente a la mariposa Monarca para engañar a depredadores y protegerse sin ser realmente tóxica. Las hembras son las expertas mimetistas, mientras los machos son negros con manchas blancas. Se encuentra en África, Asia y Australia.",
+                extended: "una de las mariposas más exitosas evolutivamente, habiendo colonizado tres continentes. Su capacidad de adaptación es extraordinaria. Las hembras pueden cambiar de patrón según la región, imitando a las especies tóxicas locales. Es común en jardines urbanos y áreas perturbadas. Tiene vuelo fuerte y directo.",
+                habitat: "Jardines, parques urbanos, zonas agrícolas y bordes de bosque en regiones tropicales y subtropicales de África, Asia y Australia. Altamente adaptable a ambientes modificados por humanos.",
+                meaning: "Adaptación, inteligencia y supervivencia"
+            },
+            {
+                id: 8,
+                suit: "corazones",
+                name: "Pasionaria",
+                latin: "Heliconius erato",
+                image: "mariposas reales/C-9 Pasionaria.jpg",
+                description: "Sus patrones rojos y negros son únicos en cada población, creando una variedad sorprendente de diseños dentro de la misma especie. Vive en grupos sociales y tiene memoria espacial excepcional para recordar la ubicación de flores que visita diariamente. Es una de las mariposas más estudiadas científicamente.",
+                extended: "Pertenece al género Heliconius, famoso por sus estrategias de supervivencia únicas. Se alimenta no solo de néctar sino también de polen, lo que le da longevidad excepcional de hasta 6 meses. Duerme en grupos en las mismas ramas cada noche. Las poblaciones locales desarrollan patrones específicos que advierten a depredadores locales.",
+                habitat: "Bordes de selva tropical, jardines con flores de Passiflora y áreas semi-abiertas desde México hasta Brasil. Prefiere zonas con flores de la pasión (su planta hospedera) y mucha luz solar filtrada.",
+                meaning: "Comunidad, memoria y conexión social"
+            },
+            {
+                id: 9,
+                suit: "corazones",
+                name: "Roja China",
+                latin: "Atrophaneura horishana",
+                image: "mariposas reales/C-10 Roja China.jpg",
+                description: "Endémica exclusiva de Taiwan, es un tesoro de conservación y símbolo de biodiversidad insular. Sus largas colas elegantes y color escarlata profundo la hacen inconfundible en los bosques montañosos brumosos. Es considerada una joya nacional en Taiwan.",
+                extended: "Viven únicamente en elevaciones medias-altas donde el clima es templado y húmedo. Es de tamaño grande y vuelo majestuoso. Las hembras son ligeramente más grandes que los machos. Se alimenta de flores de árboles nativos y es importante polinizadora. Está protegida por ley y su hábitat está amenazado por el desarrollo.",
+                habitat: "Bosques montañosos de Taiwan entre 1,000 y 2,500 metros de altitud. Requiere bosques primarios bien conservados con alta humedad y temperaturas frescas. Endémica de las montañas centrales de la isla.",
+                meaning: "Rareza, exclusividad y protección"
+            },
+            {
+                id: 10,
+                suit: "corazones",
+                name: "Dorada Asiática",
+                latin: "Hebomoia glaucippe",
+                image: "mariposas reales/C-J Dorada Asiática.jpg",
+                description: "La más grande de las mariposas blancas de Asia, aunque sus tonos son más dorados y naranjas que blancos puros. Puede alcanzar 10 cm de envergadura, siendo majestuosa en vuelo. Los machos son blancos con puntas naranjas, las hembras tienen más naranja y patrones más complejos.",
+                extended: "Tiene un vuelo poderoso y directo, muy diferente al vuelo errático de otras mariposas. Puede volar a gran velocidad cuando se siente amenazada. Es común verla en jardines botánicos y parques donde hay grandes árboles. Se alimenta de néctar de flores grandes y también de frutas fermentadas ocasionalmente.",
+                habitat: "Bosques tropicales, jardines y parques urbanos del sudeste asiático, desde India hasta Indonesia. Prefiere áreas con grandes árboles donde pueda volar en espacios abiertos. Desde nivel del mar hasta 1,500 metros.",
+                meaning: "Grandeza, abundancia y búsqueda del tesoro"
+            },
+            {
+                id: 11,
+                suit: "corazones",
+                name: "Claudina Agrias",
+                latin: "Agrias claudina",
+                image: "mariposas reales/C-Q Claudina Agrias.jpg",
+                description: "Considerada una de las mariposas más bellas del mundo por coleccionistas y entomólogos. Sus rojos intensos combinados con azules iridiscentes y patrones complejos crean una obra maestra de la naturaleza. Vuela exclusivamente en el dosel superior del bosque amazónico, haciéndola difícil de observar.",
+                extended: "Los machos son territoriales y defienden áreas de alimentación en frutas fermentadas en las copas de los árboles. Raramente desciende al suelo. Su vuelo es rápido y poderoso. Las hembras son más grandes y con colores ligeramente diferentes. Es objetivo de coleccionistas, lo que ha puesto presión en algunas poblaciones.",
+                habitat: "Dosel superior de la selva amazónica, entre 20-40 metros de altura. Requiere bosques primarios bien conservados. Presente en Brasil, Perú, Ecuador y Colombia en zonas de selva virgen",
+                meaning: "Realeza, gracia y poder femenino"
+            },
+            {
+                id: 12,
+                suit: "corazones",
+                name: "Catone",
+                latin: "Catonephele acontius",
+                image: "mariposas reales/C-K Catonephele acontius.jpg",
+                description: "Mariposa tropical con marcas rojas y anaranjadas dramáticas sobre negro profundo. Los machos tienen colores más intensos y patrones más contrastados que las hembras. Habita en selvas de América Central donde establece territorios que defiende agresivamente de otros machos.",
+                extended: "Es de tamaño mediano-grande y tiene vuelo rápido y directo. Prefiere alimentarse de frutas fermentadas en el suelo del bosque, especialmente plátanos y mangos caídos. Los machos se congregan en grupos en leks para competir por hembras. Es común cerca de ríos donde hay frutas caídas abundantes.",
+                habitat: "Sotobosque de selvas tropicales húmedas de América Central, desde México hasta Colombia. Prefiere áreas cerca de ríos y arroyos con frutas caídas. Entre nivel del mar y 800 metros de altitud.",
+                meaning: "Liderazgo, autoridad y dominio territorial"
+            },
+            {
+                id: 0,
+                suit: "diamantes",
+                name: "Morpho Azul",
+                latin: "Morpho menelaus",
+                image: "mariposas reales/D-AS.jpg",
+                description: "Las mariposas Morpho son nativas de las selvas tropicales de América Central y del Sur. Su color azul brillante no proviene de pigmentos, sino de la estructura microscópica de sus escamas.",
+                extended: "Las escamas de sus alas están organizadas en patrones que reflejan la luz de manera específica, creando ese azul iridiscente único. Los machos utilizan este brillo para atraer a las hembras y defender su territorio. Cuando vuelan, el destello de sus alas puede verse desde 400 metros de distancia.",
+                habitat: "Viven en las capas medias y bajas de las selvas tropicales, donde prefieren las áreas con luz solar filtrada. Se alimentan de frutas fermentadas y jugos de plantas, pero raramente de néctar.",
+                meaning: "Belleza, ilusión y lo efímero"
+            },
+            {
+                id: 1,
+                suit: "diamantes",
+                name: "Cola de Golondrina",
+                latin: "Papilio machaon",
+                image: "mariposas reales/D-2 Limón.webp",
+                description: "Esta mariposa es una de las más reconocibles de Europa, con sus características extensiones alares que recuerdan a la cola bifurcada de las golondrinas.",
+                extended: "Se puede encontrar en praderas floridas, jardines y campos abiertos. Sus orugas son verdes con bandas negras y puntos naranjas, y cuando se sienten amenazadas, despliegan un órgano naranja llamado osmeterio que emite un olor desagradable para ahuyentar a los depredadores.",
+                habitat: "Prefiere espacios abiertos con abundantes flores silvestres, especialmente umbelíferas como hinojo, zanahoria silvestre y perejil. Es común verlas en jardines y huertos.",
+                meaning: "Gracia, elegancia y libertad"
+            },
+            {
+                id: 2,
+                suit: "diamantes",
+                name: "Búho",
+                latin: "Caligo memnon",
+                image: "mariposas reales/D-3 Azufre.jpg",
+                description: "Las mariposas búho deben su nombre a los grandes ocelos en sus alas posteriores que se asemejan sorprendentemente a los ojos de un búho o lechuza.",
+                extended: "Esta estrategia defensiva ahuyenta a posibles depredadores como pájaros y lagartos. Son mariposas de gran tamaño, con envergaduras que pueden superar los 15 cm. Son crepusculares y se alimentan principalmente de frutas fermentadas, especialmente plátanos y mangos caídos.",
+                habitat: "Habitan en las selvas húmedas de América Central y del Sur, especialmente en áreas con abundante vegetación y plantaciones de plátano. Son más activas al amanecer y al atardecer.",
+                meaning: "Protección, misterio y sabiduría oculta"
+            },
+            {
+                id: 3,
+                suit: "diamantes",
+                name: "Glasswing",
+                latin: "Greta oto",
+                image: "mariposas reales/D-4 Ámbar.webp",
+                description: "La mariposa de alas de cristal es una de las especies más extraordinarias. Sus alas son transparentes debido a la ausencia de escamas coloreadas.",
+                extended: "El tejido entre las venas de sus alas no refleja ni refracta la luz, haciéndolas prácticamente invisibles cuando vuelan. Esta adaptación les permite evitar depredadores mientras buscan néctar en las selvas de América Central. Pueden recorrer hasta 12 kilómetros diarios en busca de alimento.",
+                habitat: "Viven en bosques húmedos tropicales, desde México hasta Panamá. Prefieren áreas con flores ricas en néctar y frecuentan las orillas de ríos y arroyos.",
+                meaning: "Transparencia, vulnerabilidad y autenticidad"
+            },
+            {
+                id: 4,
+                suit: "diamantes",
+                name: "Luna",
+                latin: "Actias luna",
+                image: "mariposas reales/D-5 Amarilla Manchada.jpg",
+                description: "La polilla Luna es una de las especies nocturnas más hermosas de Norteamérica, con sus grandes alas de color verde lima y largas colas ondulantes.",
+                extended: "Los adultos solo viven aproximadamente una semana, durante la cual no se alimentan, dedicando toda su energía a la reproducción. Sus largas colas confunden el sonar de los murciélagos, ayudándoles a evitar la depredación. Emergen de sus capullos al amanecer, cuando sus alas están más seguras de los depredadores.",
+                habitat: "Se encuentran en bosques caducifolios de América del Norte. Sus orugas se alimentan de hojas de nogal, abedul, liquidámbar y otros árboles. Son más comunes en primavera y verano.",
+                meaning: "Intuición, misterio y renovación"
+            },
+            {
+                id: 5,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-6 Glassy Bluebottle.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 6,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-7 Sol.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 7,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-8 Canaria.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 8,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-9 Mostaza.webp",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 9,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-10 Crema.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 10,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-J Smooth-banded Sister.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 11,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-Q king swallowtail.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 12,
+                suit: "diamantes",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/D-K Automedon Giant Owl.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 0,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-AS Alas de Pájaro.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 1,
+                suit: "treboles",
+                name: "Roja Sangre",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-2 Jade.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 2,
+                suit: "treboles",
+                name: "Alas de fuego",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-3 Mosaico.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 3,
+                suit: "treboles",
+                name: "Tigre",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-4 Malaquita.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 4,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-5 Verde Rayada 2.webp",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 5,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-6 Negra Puntos Verdes.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 6,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-7 Cebra Verde.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 7,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-8 Musgo.avif",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 8,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-9 Esmeralda Bandas.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 9,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-10 Gigante Africana.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 10,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-J Verde común.JPG",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 11,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-Q Alas de Brooke.png",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 12,
+                suit: "treboles",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/T-K Espada Streseman.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 0,
+                suit: "picas",
+                name: "Morpho Azul",
+                latin: "Morpho menelaus",
+                image: "mariposas reales/P-AS Morpho.jpg",
+                description: "Las mariposas Morpho son nativas de las selvas tropicales de América Central y del Sur. Su color azul brillante no proviene de pigmentos, sino de la estructura microscópica de sus escamas.",
+                extended: "Las escamas de sus alas están organizadas en patrones que reflejan la luz de manera específica, creando ese azul iridiscente único. Los machos utilizan este brillo para atraer a las hembras y defender su territorio. Cuando vuelan, el destello de sus alas puede verse desde 400 metros de distancia.",
+                habitat: "Viven en las capas medias y bajas de las selvas tropicales, donde prefieren las áreas con luz solar filtrada. Se alimentan de frutas fermentadas y jugos de plantas, pero raramente de néctar.",
+                meaning: "Belleza, ilusión y lo efímero"
+            },
+            {
+                id: 1,
+                suit: "picas",
+                name: "Cola de Golondrina",
+                latin: "Papilio machaon",
+                image: "mariposas reales/P-2 Narciso.jpg",
+                description: "Esta mariposa es una de las más reconocibles de Europa, con sus características extensiones alares que recuerdan a la cola bifurcada de las golondrinas.",
+                extended: "Se puede encontrar en praderas floridas, jardines y campos abiertos. Sus orugas son verdes con bandas negras y puntos naranjas, y cuando se sienten amenazadas, despliegan un órgano naranja llamado osmeterio que emite un olor desagradable para ahuyentar a los depredadores.",
+                habitat: "Prefiere espacios abiertos con abundantes flores silvestres, especialmente umbelíferas como hinojo, zanahoria silvestre y perejil. Es común verlas en jardines y huertos.",
+                meaning: "Gracia, elegancia y libertad"
+            },
+            {
+                id: 2,
+                suit: "picas",
+                name: "Búho",
+                latin: "Caligo memnon",
+                image: "mariposas reales/P-3 Púrpura Emperador.webp",
+                description: "Las mariposas búho deben su nombre a los grandes ocelos en sus alas posteriores que se asemejan sorprendentemente a los ojos de un búho o lechuza.",
+                extended: "Esta estrategia defensiva ahuyenta a posibles depredadores como pájaros y lagartos. Son mariposas de gran tamaño, con envergaduras que pueden superar los 15 cm. Son crepusculares y se alimentan principalmente de frutas fermentadas, especialmente plátanos y mangos caídos.",
+                habitat: "Habitan en las selvas húmedas de América Central y del Sur, especialmente en áreas con abundante vegetación y plantaciones de plátano. Son más activas al amanecer y al atardecer.",
+                meaning: "Protección, misterio y sabiduría oculta"
+            },
+            {
+                id: 3,
+                suit: "picas",
+                name: "Glasswing",
+                latin: "Greta oto",
+                image: "mariposas reales/P-4 Emperador Azul.avif",
+                description: "La mariposa de alas de cristal es una de las especies más extraordinarias. Sus alas son transparentes debido a la ausencia de escamas coloreadas.",
+                extended: "El tejido entre las venas de sus alas no refleja ni refracta la luz, haciéndolas prácticamente invisibles cuando vuelan. Esta adaptación les permite evitar depredadores mientras buscan néctar en las selvas de América Central. Pueden recorrer hasta 12 kilómetros diarios en busca de alimento.",
+                habitat: "Viven en bosques húmedos tropicales, desde México hasta Panamá. Prefieren áreas con flores ricas en néctar y frecuentan las orillas de ríos y arroyos.",
+                meaning: "Transparencia, vulnerabilidad y autenticidad"
+            },
+            {
+                id: 4,
+                suit: "picas",
+                name: "Luna",
+                latin: "Actias luna",
+                image: "mariposas reales/P-5 Lapislázuli.jpg",
+                description: "La polilla Luna es una de las especies nocturnas más hermosas de Norteamérica, con sus grandes alas de color verde lima y largas colas ondulantes.",
+                extended: "Los adultos solo viven aproximadamente una semana, durante la cual no se alimentan, dedicando toda su energía a la reproducción. Sus largas colas confunden el sonar de los murciélagos, ayudándoles a evitar la depredación. Emergen de sus capullos al amanecer, cuando sus alas están más seguras de los depredadores.",
+                habitat: "Se encuentran en bosques caducifolios de América del Norte. Sus orugas se alimentan de hojas de nogal, abedul, liquidámbar y otros árboles. Son más comunes en primavera y verano.",
+                meaning: "Intuición, misterio y renovación"
+            },
+            {
+                id: 5,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-6 Violeta.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 6,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-7 Índigo.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 7,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-8 Azul Real.webp",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 8,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-9 Blue Banded Eggfly.avif",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 9,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-10 Medianoche.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 10,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-J Rhetus Periander.webp",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 11,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-Q Red Cracker.jpg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+            {
+                id: 12,
+                suit: "picas",
+                name: "Monarca",
+                latin: "Danaus plexippus",
+                image: "mariposas reales/P-K Rajá Fournier.jpeg",
+                description: "La mariposa Monarca es uno de los insectos más fascinantes del mundo. Cada año, millones de ellas emprenden un viaje migratorio de hasta 4,000 kilómetros desde Canadá y Estados Unidos hasta los bosques de México.",
+                extended: "Su ciclo de vida completo dura aproximadamente dos meses, pero la generación migratoria puede vivir hasta 8 meses. Sus colores naranjas y negros advierten a los depredadores de su toxicidad, adquirida al alimentarse de algodoncillo en su fase de oruga. Este viaje transgeneracional es uno de los fenómenos más impresionantes de la naturaleza.",
+                habitat: "Las Monarcas habitan en praderas, campos abiertos y jardines donde crecen plantas de algodoncillo. Durante el invierno, se congregan en bosques de oyamel en México, creando espectaculares colonias donde millones de mariposas cubren los árboles.",
+                meaning: "Transformación, perseverancia y el viaje de la vida"
+            },
+        ];
+
+        const suitInfo = {
+            corazones: {
+                titulo: "♥️ Corazones",
+                subtitulo: "Mariposas rojas y naranjas. Palo de la pasión, la pulsación y el deseo."
+            },
+            diamantes: {
+                titulo: "♦️ Diamantes",
+                subtitulo: "Mariposas amarillas y doradas. Palo de la luz, el brillo y la claridad."
+            },
+            treboles: {
+                titulo: "♣️ Tréboles",
+                subtitulo: "Mariposas verdes y negras. Palo de la naturaleza, la raíz y lo instintivo."
+            },
+            picas: {
+                titulo: "♠️ Picas",
+                subtitulo: "Mariposas azules y moradas. Palo del misterio, la noche y la intuición."
+            }
+        };
+
+        const categorySection = document.getElementById('categorySection');
+        const gallerySection = document.getElementById('gallerySection');
+        const galleryTitle = document.getElementById('galleryTitle');
+        const gallerySubtitle = document.getElementById('gallerySubtitle');
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        function openSuit(suitKey) {
+            const info = suitInfo[suitKey];
+            const suitButterflies = butterflies.filter(b => b.suit === suitKey);
+
+            galleryTitle.textContent = info.titulo;
+            gallerySubtitle.textContent = info.subtitulo;
+
+            galleryGrid.innerHTML = suitButterflies.map(b => `
+                <div class="butterfly-card" onclick="openDetail(${b.id})">
+                    <img class="card-image" src="${b.image}" alt="${b.name}">
+                    <div class="card-info">
+                        <div class="card-name">${b.name}</div>
+                        <div class="card-latin">${b.latin}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            categorySection.style.display = 'none';
+            gallerySection.classList.add('active');
+            gallerySection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function backToCategories() {
+            gallerySection.classList.remove('active');
+            categorySection.style.display = 'block';
+            categorySection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // DETAIL
+        function openDetail(id) {
+            const butterfly = butterflies.find(b => b.id === id);
+            const detailPage = document.getElementById('detailPage');
+            const detailContent = document.getElementById('detailContent');
+
+            detailContent.innerHTML = `
+                <div class="detail-hero">
+                    <div class="detail-image-wrapper">
+                        <img class="detail-hero-img" src="${butterfly.image}" alt="${butterfly.name}">
+                    </div>
+                    <div class="detail-hero-text">
+                        <h1 class="detail-title">${butterfly.name}</h1>
+                        <p class="detail-latin">${butterfly.latin}</p>
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-section">
+                        <h2>La Mariposa</h2>
+                        <p>${butterfly.description}</p>
+                        <p>${butterfly.extended}</p>
+                    </div>
+                    <div class="detail-section">
+                        <h2>Hábitat</h2>
+                        <p>${butterfly.habitat}</p>
+                    </div>
+                    <div class="meaning-box">
+                        <h3>✨ Simbolismo</h3>
+                        <p>${butterfly.meaning}</p>
+                    </div>
+                </div>
+            `;
+
+            detailPage.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetail() {
+            const detailPage = document.getElementById('detailPage');
+            detailPage.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Smooth scroll desde el hero
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.category-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+
+
